@@ -111,7 +111,7 @@ router.post('/forgot', function(req, res, next) {
 router.get('/reset/:token', function(req, res) {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
 	if (!user) {
-	    res.json('error', 'Le token est invalide ou a expité.');
+	    console.log("Le token est invalide ou a expité.");
 	    return res.redirect('/forgot');
 	}
 	res.render('reset', {
@@ -124,10 +124,10 @@ router.post('/reset/:token', function(req, res) {
   async.waterfall([
     function(done) {
       User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
-        if (!user) {
-            req.flash('error', 'Le token est invalide ou a expiré.');
-            return res.redirect('back');
-        } 
+          if (!user) {
+              console.log("Le token est invalide ou a expiré.");
+              return res.redirect('back');
+          } 
           user.password = req.body.password;
           user.resetPasswordToken = undefined;
           user.resetPasswordExpires = undefined;
