@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/', users);
 
-mongoose.connect('mongodb://localhost/newtemp');
+mongoose.connect('mongodb://localhost/newtemps');
 
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

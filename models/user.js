@@ -23,18 +23,6 @@ var UserSchema = new Schema({
     isAdmin: Boolean,
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    comments: [{
-	type: mongoose.Schema.Types.ObjectId,
-	ref: 'User'
-    }]
-});
-
-var CommentsSchema = new Schema({
-    text: String,
-    creator: {
-	type: mongoose.Schema.Types.ObjectId,
-	ref: 'User'
-    }
 });
 
 UserSchema.pre('save', function(next) {
@@ -61,4 +49,3 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
 UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', UserSchema);
-module.exports = mongoose.model('Comments', CommentsSchema);

@@ -16,7 +16,10 @@ var smtpTransport = nodemailer.createTransport('SMTP', {
 });
 
 passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password'}, function(username, password, done) {
+    console.log('ici');
+    console.log(username);
     User.findOne({ email: username }, function(err, user) {
+	console.log(user);
 	if (err) return done(err);
 	if (!user)
 	    return done(null, false, { message: 'Incorrect username.' });
